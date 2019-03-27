@@ -152,13 +152,12 @@ ListView {
         return list;
     }
 
-
     signal dragFinished()
     signal doubleClicked(int plantingId)
 
-    // Ids of selected plantings
+    //! Ids of selected plantings
     property var selectedIds: ({})
-    // Number of selected plantings
+    //! Number of selected plantings
     property int checks: numberOfTrue(selectedIds)
     property int firstSelectedIndex: -1
     property int secondSelectedIndex: -1
@@ -206,10 +205,12 @@ ListView {
         plantingModel.resetFilter();
     }
 
+    // Save visible columns setting.
     onVisibleColumnIdListChanged: {
         settings.visibleColumnList = visibleColumnIdList;
     }
 
+    // Restore visible columns setting.
     Component.onCompleted: {
         var j = 0; // visibleColumnList index
         for (var i = 0; i < tableHeaderModel.length; i++) {
@@ -647,7 +648,7 @@ ListView {
                 ListView {
                     model: keywordStringList
                     spacing: Units.smallSpacing
-                    visible: tableHeaderModel[tableHeaderModel.length-1].visible
+                    visible: !showOnlyTimegraph && tableHeaderModel[tableHeaderModel.length-1].visible
                     orientation: Qt.Horizontal
                     width: tableHeaderModel[tableHeaderModel.length-1].width
                     height: Units.rowHeight
