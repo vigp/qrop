@@ -217,10 +217,9 @@ ListView {
             while (settings.visibleColumnList[j] < i)
                 j++;
 
-            if (Number(settings.visibleColumnList[j]) === i) {
-                console.log("true!")
+            if (Number(settings.visibleColumnList[j]) === i)
                 tableHeaderModel[i].visible = true;
-            } else
+            else
                 tableHeaderModel[i].visible = false;
         }
         tableHeaderModelChanged();
