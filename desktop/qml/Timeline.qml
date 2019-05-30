@@ -37,6 +37,7 @@ Item {
     property bool showFamilyColor: false
     property int locationId: -1
     property bool showNames: false
+    property bool showTasks: false
     property bool dragActive: false
 
     signal plantingClicked(int plantingId)
@@ -84,6 +85,7 @@ Item {
 
     Item {
         id: taskTimegraphView
+        visible: showTasks
         anchors.fill: parent
         Repeater {
             model: taskIdList

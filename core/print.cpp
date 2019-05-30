@@ -959,8 +959,10 @@ void Print::paintTimeline(QPainter &painter, int row, const QModelIndex &parent,
     QDate seasonBeg = seasonDates.first;
     QDate seasonEnd = seasonDates.second;
 
-    for (int taskId : location->tasks(locationId, seasonBeg, seasonEnd))
-        paintTaskTimeGraph(painter, row, taskId);
+    if (mSettings->value("LocationView/showTasks", false).toBool()) {
+        for (int taskId : location->tasks(locationId, seasonBeg, seasonEnd))
+            paintTaskTimeGraph(painter, row, taskId);
+    }
 
     for (int plantingId : location->plantings(locationId, seasonBeg, seasonEnd))
         paintPlantingTimegraph(painter, row, plantingId, year);
