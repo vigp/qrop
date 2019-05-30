@@ -31,6 +31,7 @@ Item {
     property int monthWidth: Units.monthWidth
     readonly property int graphWidth: 12 * monthWidth
     property var plantingIdList
+    property var taskIdList
     property bool showGreenhouseSow: true
     property bool showOnlyActiveColor: false
     property bool showFamilyColor: false
@@ -82,6 +83,19 @@ Item {
     }
 
     Item {
+        id: taskTimegraphView
+        anchors.fill: parent
+        Repeater {
+            model: taskIdList
+
+            TaskTimegraph {
+                taskId: modelData
+                seasonBegin: control.seasonBegin
+            }
+        }
+    }
+
+    Item {
         id: timegraphView
         anchors.fill: parent
         Repeater {
@@ -105,5 +119,6 @@ Item {
             }
         }
     }
+
 
 }

@@ -803,6 +803,7 @@ Item {
                                 showFamilyColor: view.showFamilyColor
                                 dragActive: true
                                 plantingIdList: locationModel.plantings(styleData.index, season, year)
+                                taskIdList: locationModel.tasks(styleData.index, season, year)
                                 locationId: locationModel.locationId(styleData.index)
                                 onDragFinished: treeView.draggedPlantingId = -1
                                 onPlantingMoved: {

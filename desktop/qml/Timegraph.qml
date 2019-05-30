@@ -19,7 +19,7 @@ Item {
     property bool showFamilyColor: false
     property int year
     property date seasonBegin
-    property color cropColor: showFamilyColor ? Planting.familyColor(plantingId) :Planting.cropColor(plantingId)
+    property color cropColor: showFamilyColor ? Planting.familyColor(plantingId) : Planting.cropColor(plantingId)
     property date seedingDate: Planting.sowingDate(plantingId)
     property date plantingDate: Planting.plantingDate(plantingId)
     property date beginHarvestDate: Planting.begHarvestDate(plantingId)
@@ -134,10 +134,10 @@ Item {
     
     Rectangle {
         id: seedingLine
+        x: seedingCircle.x
         width: Units.widthBetween(x+control.x, seasonBegin, plantingDate)
         visible: showGreenhouseSow && width > 0 && seedingDate < plantingDate
         height: 1
-        x: seedingCircle.x
         color: current ? Material.color(Material.Green, Material.Shade200)
                        : Material.color(Material.Grey, control.hovered ? Material.Shade500
                                                                        : Material.Shade400)
