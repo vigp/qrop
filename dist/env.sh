@@ -2,6 +2,8 @@
 
 QROP_VERSION=$(git describe --tags)
 QROP_COMMIT=$(git rev-parse HEAD)
+echo $QROP_VERSION
+echo $QROP_COMMIT
 
 EXE_VERSION=$(echo $QROP_VERSION | tr -d 'v')
 EXE_BASENAME=Qrop-${EXE_VERSION}
