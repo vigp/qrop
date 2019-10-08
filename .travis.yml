@@ -11,6 +11,7 @@ matrix:
         - PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
       osx_image: xcode10.1
       compiler: clang
+      language: c++
       addons:
         homebrew:
           packages:
