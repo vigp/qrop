@@ -2,25 +2,42 @@ image: andreh11/qt:5.12.5-trusty
 
 stages:
   - build
+  - deploy
 
-normal-build:
+# normal-build:
+#   stage: build
+#   script:
+#     - bash dist/linux/build.sh
+#   except:
+#     - master
+#     - tags
+
+master-build:
   stage: build
   script:
     - bash dist/linux/build.sh
-    - echo "${FTP_HOST}/httpdocs/snapshots/Qrop-nightly.AppImage"
     - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD $FTP_HOST/httpdocs/snapshots/Qrop-nightly.AppImage
-  except:
-    - tags
+  # only:
+  #   - master
+  # except:
+  #   - tags
 
-release-build:
-  stage: build
+# release-build:
+#   stage: build
+#   script:
+#     - bash dist/linux/build.sh
+#     - bash dist/linux/deploy.sh
+#   artifacts:
+#     name: "$CI_COMMIT_REF_NAME"
+#     paths:
+#       - Qrop*.AppImage
+#     expire_in: 1 weeks
+#   only:
+#    - tags
+
+deploy:
+  stage: deploy
   script:
-    - bash dist/linux/build.sh
-    - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD "${FTP_HOST}/httpdocs/snapshots/Qrop-nightly.AppImage"
-  artifacts:
-    name: "$CI_COMMIT_REF_NAME"
-    paths:
-      - Qrop*.AppImage
-    expire_in: 1 weeks
+    - bash dist/gitlab-release.sh
   only:
-   - tags
+    -tags
