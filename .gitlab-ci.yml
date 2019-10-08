@@ -2,12 +2,12 @@ image: andreh11/qt:5.12.5-trusty
 
 stages:
   - build
-  - deploy
 
 normal-build:
   stage: build
   script:
     - bash dist/linux/build.sh
+    - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD "${FTP_HOST}/httpdocs/snapshots/Qrop-nightly.AppImage"
   except:
     - tags
 
@@ -15,6 +15,7 @@ release-build:
   stage: build
   script:
     - bash dist/linux/build.sh
+    - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD "${FTP_HOST}/httpdocs/snapshots/Qrop-nightly.AppImage"
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
@@ -22,11 +23,3 @@ release-build:
     expire_in: 1 weeks
   only:
    - tags
-
-deploy:
-  stage: deploy
-  # only:
-  #   refs:
-  #     - master
-  script:
-    - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD "${FTP_HOST}/httpdocs/snapshots/Qrop-nightly.AppImage"
