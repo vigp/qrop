@@ -16,29 +16,43 @@ master-build:
   stage: build
   script:
     - bash dist/linux/build.sh
-    # - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD $FTP_HOST/httpdocs/snapshots/Qrop-nightly.AppImage
     - bash dist/linux/deploy.sh
+  variables:
+    QROP_BUILD_TYPE: "snapshot"
   # only:
   #   - master
   # except:
   #   - tags
 
-# release-build:
-#   stage: build
-#   script:
-#     - bash dist/linux/build.sh
-#     - bash dist/linux/deploy.sh
-#   artifacts:
-#     name: "$CI_COMMIT_REF_NAME"
-#     paths:
-#       - Qrop*.AppImage
-#     expire_in: 1 weeks
-#   only:
-#    - tags
+release-build:
+  stage: build
+  script:
+    - bash dist/linux/build.sh
+    - bash dist/linux/deploy.sh
+  variables:
+    QROP_BUILD_TYPE: "release"
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - Qrop*.AppImage
+    expire_in: 1 weeks
+  only:
+   - tags
 
-deploy:
+snapshot-deploy:
   stage: deploy
+  variables:
+    QROP_BUILD_TYPE: "snapshot"
   script:
     - bash dist/gitlab-release.sh
+  # only:
+  #   -tags
+
+# release-deploy:
+#   stage: deploy
+#   variables:
+#     QROP_BUILD_TYPE: "release"
+#   script:
+#     - bash dist/gitlab-release.sh
   # only:
   #   -tags
