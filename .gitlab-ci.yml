@@ -4,21 +4,21 @@ stages:
   - build
   - deploy
 
-# normal-build:
-#   stage: build
-#   script:
-#     - bash dist/linux/build.sh
-#   except:
-#     - master
-#     - tags
-
-master-build:
+normal-build:
   stage: build
   script:
     - bash dist/linux/build.sh
-    - bash dist/linux/deploy.sh
+  except:
+    - master
+    - tags
+
+master-build:
+  stage: build
   variables:
     QROP_BUILD_TYPE: "snapshot"
+  script:
+    - bash dist/linux/build.sh
+    - bash dist/linux/deploy.sh
   only:
     - master
   except:
@@ -26,11 +26,11 @@ master-build:
 
 release-build:
   stage: build
+  variables:
+    QROP_BUILD_TYPE: "release"
   script:
     - bash dist/linux/build.sh
     - bash dist/linux/deploy.sh
-  variables:
-    QROP_BUILD_TYPE: "release"
   artifacts:
     name: "$CI_COMMIT_REF_NAME"
     paths:
@@ -55,4 +55,4 @@ release-deploy:
   script:
     - bash dist/gitlab-release.sh
   only:
-    -tags
+    - tags
