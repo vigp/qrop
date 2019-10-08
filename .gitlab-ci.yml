@@ -16,7 +16,8 @@ master-build:
   stage: build
   script:
     - bash dist/linux/build.sh
-    - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD $FTP_HOST/httpdocs/snapshots/Qrop-nightly.AppImage
+    # - curl --ftp-create-dirs -T Qrop*.AppImage -u $FTP_USER:$FTP_PASSWD $FTP_HOST/httpdocs/snapshots/Qrop-nightly.AppImage
+    - bash dist/linux/deploy.sh
   # only:
   #   - master
   # except:

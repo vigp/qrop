@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source env.sh
+source dist/env.sh
 
 curl --header 'Content-Type: application/json' \
     --header "Private-Token: ${CURL_TOKEN}" \
