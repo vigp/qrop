@@ -13,6 +13,6 @@ find . \( -name "moc_*" -or -name "*.o" -or -name "qrc_*" -or -name "Makefile*" 
 # cp dist/Qrop.desktop deploy/usr/share/applications
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH;
 # cp -R dist/osx/Qrop.app .
-ls -al
+tree Qrop.app
 macdeployqt Qrop.app -qmldir=$BUILD_DIR/desktop/qml -verbose 2 -executable="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
 appdmg dist/osx/DiskImage/layout.json .
