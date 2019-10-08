@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export BUILD_DIR=$PWD
+export APP_NAME=Qrop
 npm install -g appdmg
 cmake . -DCMAKE_BUILD_TYPE=Release
 make -j4
@@ -11,7 +12,7 @@ find . \( -name "moc_*" -or -name "*.o" -or -name "qrc_*" -or -name "Makefile*" 
 # cp logo.png deploy/qrop.png
 # cp dist/Qrop.desktop deploy/usr/share/applications
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH;
-cp -R dist/osx/Qrop.app .
+# cp -R dist/osx/Qrop.app .
 ls -al
-macdeployqt Qrop.app -libpath=$BUILD_DIR/core -qmldir=$BUILD_DIR/desktop/qml -verbose 2
+macdeployqt Qrop.app -qmldir=$BUILD_DIR/desktop/qml -verbose 2 -executable="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
 appdmg dist/osx/DiskImage/layout.json .

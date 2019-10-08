@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(QtCommon)
 
 # Project informations
-project(qrop LANGUAGES CXX VERSION "0.4")
+project(Qrop LANGUAGES CXX VERSION 0.4)
 fix_project_version()
 set(COMPANY "L'Atelier paysan")
 set(COPYRIGHT "Copyright (c) 2018-2019 André Hoarau")
