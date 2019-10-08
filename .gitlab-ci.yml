@@ -39,5 +39,5 @@ deploy:
   stage: deploy
   script:
     - bash dist/gitlab-release.sh
-  only:
-    -tags
+  # only:
+  #   -tags
