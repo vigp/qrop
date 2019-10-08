@@ -19,10 +19,10 @@ master-build:
     - bash dist/linux/deploy.sh
   variables:
     QROP_BUILD_TYPE: "snapshot"
-  # only:
-  #   - master
-  # except:
-  #   - tags
+  only:
+    - master
+  except:
+    - tags
 
 release-build:
   stage: build
@@ -39,20 +39,20 @@ release-build:
   only:
    - tags
 
-snapshot-deploy:
-  stage: deploy
-  variables:
-    QROP_BUILD_TYPE: "snapshot"
-  script:
-    - bash dist/gitlab-release.sh
-  # only:
-  #   -tags
-
-# release-deploy:
+# snapshot-deploy:
 #   stage: deploy
 #   variables:
-#     QROP_BUILD_TYPE: "release"
+#     QROP_BUILD_TYPE: "snapshot"
 #   script:
 #     - bash dist/gitlab-release.sh
-  # only:
+#   # only:
   #   -tags
+
+release-deploy:
+  stage: deploy
+  variables:
+    QROP_BUILD_TYPE: "release"
+  script:
+    - bash dist/gitlab-release.sh
+  only:
+    -tags
